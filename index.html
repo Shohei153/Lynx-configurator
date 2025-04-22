@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoC Configurator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .step { display: none; }
+    .step.active { display: block; }
+    .option-image { max-height: 80px; margin-bottom: 0.5rem; }
+  </style>
+  <script defer>
+    let currentStep = 0;
+
+    function showStep(n) {
+      const steps = document.querySelectorAll(".step");
+      steps.forEach((s, i) => s.classList.toggle("active", i === n));
+    }
+
+    function nextStep() {
+      const config = document.querySelector('input[name="config"]:checked')?.value;
+      if (config === "mpo" && currentStep === 0) {
+        currentStep = 6;
+      } else {
+        currentStep++;
+      }
+      showStep(currentStep);
+    }
+
+    function prevStep() {
+      currentStep--;
+      showStep(currentStep);
+    }
+
+    function updatePartNumber() {
+      const config = document.querySelector('input[name="config"]:checked')?.value;
+      if (config === "single") {
+        const connector = document.querySelector('input[name="connector"]:checked')?.value || "";
+        const polish = document.querySelector('input[name="polish"]:checked')?.value || "";
+        const fiber = document.querySelector('input[name="fiber"]:checked')?.value || "";
+        const boot = document.querySelector('input[name="boot"]:checked')?.value || "";
+        document.getElementById("result").innerText = `LYNX3-${connector}-${polish}-${fiber}-${boot}`;
+      } else if (config === "mpo") {
+        const gender = document.querySelector('input[name="gender"]:checked')?.value || "";
+        const type = document.querySelector('input[name="bb"]:checked')?.value || "";
+        const loss = document.querySelector('input[name="cc"]:checked')?.value || "";
+        const jacket = document.querySelector('input[name="ddddd"]:checked')?.value || "";
+        document.getElementById("result").innerText = `LYNX2-MPO12 ${gender}-${type}-${loss}-${jacket}`;
+      }
+    }
+
+    function handleBBChange(value) {
+      const smOptions = document.getElementById("cc-sm");
+      const mmOptions = document.getElementById("cc-mm");
+      if (value === "SM") {
+        smOptions.classList.remove("hidden");
+        mmOptions.classList.add("hidden");
+      } else {
+        smOptions.classList.add("hidden");
+        mmOptions.classList.remove("hidden");
+      }
+    }
+
+    window.onload = () => showStep(0);
+  </script>
+</head>
+<body class="bg-gray-100 p-4 text-sm">
+  <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg space-y-6">
+    <h1 class="text-xl font-bold text-center">SoC Configurator</h1>
+
+    <!-- Step 0: Configuration Type -->
+<div class="step active">
+  <p class="font-semibold mb-2">Select Configuration Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="config" value="single" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/single-fiber.png" class="option-image" alt="Single Fiber">
+      Single Fiber Connectors<br><span class="text-xs text-gray-600">LYNX3 - AA BBB - CCC - DDDDDDDD</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="config" value="mpo" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/ribbon-mpo.png" class="option-image" alt="Ribbon MPO">
+      Ribbon MPO Connectors<br><span class="text-xs text-gray-600">LYNX2-MPO12 A - BB - CC - DDDDD</span>
+    </label>
+  </div>
+  <div class="flex justify-end mt-4">
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 1: Connector Type (Single Fiber) -->
+<div class="step">
+  <p class="font-semibold mb-2">1. Choose Connector Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="LC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/LC.png" class="option-image" alt="LC"> LC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="SC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/SC.png" class="option-image" alt="SC"> SC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="FC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/FC.png" class="option-image" alt="FC"> FC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="ST" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/ST.png" class="option-image" alt="ST"> ST
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 2: Polish Type -->
+<div class="step">
+  <p class="font-semibold mb-2">2. Choose Polish Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="APC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/APC.png" class="option-image" alt="APC"> APC<br><span class="text-xs text-gray-600">Angled Polish</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="UPC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/UPC.png" class="option-image" alt="UPC"> UPC<br><span class="text-xs text-gray-600">Ultra Polished</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="PC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/PC.png" class="option-image" alt="PC"> PC<br><span class="text-xs text-gray-600">Physical Contact</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 3: Fiber Type -->
+<div class="step">
+  <p class="font-semibold mb-2">3. Choose Fiber Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="SM" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/SM.png" class="option-image" alt="SM"> SM<br><span class="text-xs text-gray-600">Single Mode</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM1" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/OM1.png" class="option-image" alt="OM1"> OM1<br><span class="text-xs text-gray-600">Multimode 62.5µm</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM2" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/OM2.png" class="option-image" alt="OM2"> OM2<br><span class="text-xs text-gray-600">Multimode 50µm</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM3" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/OM3.png" class="option-image" alt="OM3"> OM3<br><span class="text-xs text-gray-600">Laser Optimized OM3, OM4, OM5 Compatible</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 4: Boot Option -->
+<div class="step">
+  <p class="font-semibold mb-2">4. Choose Boot Option</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250900" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/250900.png" class="option-image" alt="250900"> 250900<br><span class="text-xs text-gray-600">For 250µm or 900µm Tight Buffer</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250900SB" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/250900SB.png" class="option-image" alt="250900SB"> 250900SB<br><span class="text-xs text-gray-600">Short Boot Option for SC and LC</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250FT8" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/250FT8.png" class="option-image" alt="250FT8"> 250FT8<br><span class="text-xs text-gray-600">With 8" Furcation Tube</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="2.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/2.0.png" class="option-image" alt="2.0"> 2.0<br><span class="text-xs text-gray-600">For 2.0mm Cord</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="2.0LT" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/2.0LT.png" class="option-image" alt="2.0LT"> 2.0LT<br><span class="text-xs text-gray-600">With 900µm Tube</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="3.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/3.0.png" class="option-image" alt="3.0"> 3.0<br><span class="text-xs text-gray-600">For 3.0mm Cord</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="3.0DCL" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/3.0DCL.png" class="option-image" alt="3.0DCL"> 3.0DCL<br><span class="text-xs text-gray-600">Only for LC Duplex 3.0mm</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="4.8" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/4.8.png" class="option-image" alt="4.8"> 4.8<br><span class="text-xs text-gray-600">For 4.8mm Cord</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+  <!-- Step 5: Choose Gender (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">5. Choose Gender</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="gender" value="M" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/male.png" class="option-image" alt="Male"> M<br><span class="text-xs text-gray-600">Male</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="gender" value="F" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/female.png" class="option-image" alt="Female"> F<br><span class="text-xs text-gray-600">Female</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 6: Choose Fiber Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">6. Choose Fiber Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="bb" value="SM" class="sr-only" onchange="handleBBChange('SM'); updatePartNumber()">
+      <img src="https://your-github-url.com/SM.png" class="option-image" alt="SM"> SM<br><span class="text-xs text-gray-600">Single Mode</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="bb" value="MM" class="sr-only" onchange="handleBBChange('MM'); updatePartNumber()">
+      <img src="https://your-github-url.com/MM.png" class="option-image" alt="MM"> MM<br><span class="text-xs text-gray-600">Multimode</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 7: Choose Loss Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">7. Choose Loss Type</p>
+  <div id="cc-sm" class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="LL" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/LL.png" class="option-image" alt="LL"> LL<br><span class="text-xs text-gray-600">Low Loss (IL ≤ 35dB RL ≥ 60dB)</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="SL" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/SL.png" class="option-image" alt="SL"> SL<br><span class="text-xs text-gray-600">Standard Loss (IL ≤ 75dB RL ≥ 60dB)</span>
+    </label>
+  </div>
+  <div id="cc-mm" class="grid gap-3 hidden">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="01" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/01.png" class="option-image" alt="01"> 01<br><span class="text-xs text-gray-600">62.5µm (IL ≤ 35dB RL ≥ 20dB)</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="02" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/02.png" class="option-image" alt="02"> 02<br><span class="text-xs text-gray-600">50µm (IL ≤ 35dB RL ≥ 20dB)</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="03" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/03.png" class="option-image" alt="03"> 03<br><span class="text-xs text-gray-600">Laser Optimized (OM3, OM4, OM5)</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 8: Choose Jacket Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">8. Choose Jacket Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RBN" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/RBN.png" class="option-image" alt="RBN"> RBN<br><span class="text-xs text-gray-600">For 12f Ribbon (No Jacket)</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RBC" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/RBC.png" class="option-image" alt="RBC"> RBC<br><span class="text-xs text-gray-600">For 12f Ribbon (With Jacket)</span>
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RC3.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="https://your-github-url.com/RC3.0.png" class="option-image" alt="RC3.0"> RC3.0<br><span class="text-xs text-gray-600">For 3.0mm Cord</span>
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+  </div>
+</div>
+
+<!-- Step 9: Result Summary -->
+<div class="step text-center">
+  <p class="text-lg font-semibold mb-2">Your Generated Part Number</p>
+  <p id="result" class="text-xl font-mono font-bold text-green-600 mb-4"></p>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('result').innerText)" class="mb-4 bg-gray-200 hover:bg-gray-300 text-sm px-3 py-1 rounded">📋 Copy to Clipboard</button>
+
+  <div class="space-y-2">
+    <a href="https://example.com/spec-sheet" target="_blank" class="block text-blue-600 underline">📄 View Spec Sheet</a>
+    <a href="https://example.com/manual" target="_blank" class="block text-blue-600 underline">📘 Installation Manual</a>
+  </div>
+
+  <button onclick="currentStep=0;showStep(0)" class="mt-6 text-blue-500 underline text-sm">🔁 Start Over</button>
+</div>
+
+</div>
+</body>
+</html>
