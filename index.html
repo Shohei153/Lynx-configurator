@@ -19,6 +19,15 @@
       steps.forEach((step, index) => step.classList.toggle("active", index === stepNumber));
     }
 
+  function validateStep0() {
+    const configSelected = document.querySelector('input[name="config"]:checked');
+    if (!configSelected) {
+      alert("Please select a configuration type before proceeding.");
+    } else {
+      nextStep();
+    }
+  }
+    
     function nextStep() {
       if (currentStep === 0) {
         selectedConfiguration = document.querySelector('input[name="config"]:checked')?.value;
@@ -115,7 +124,7 @@
         </label>
       </div>
       <div class="flex justify-end mt-4">
-        <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+        <button onclick="validateStep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
       </div>
     </div>
 <!-- Step 1: Select Connector Type (Single Fiber) -->
@@ -141,7 +150,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -164,7 +173,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -191,7 +200,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -222,7 +231,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -241,7 +250,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -260,7 +269,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -298,7 +307,7 @@
 
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -321,7 +330,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
   </div>
 </div>
 
