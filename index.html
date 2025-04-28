@@ -19,10 +19,10 @@
       steps.forEach((step, index) => step.classList.toggle("active", index === stepNumber));
     }
 
-  function validateStep0() {
-    const configSelected = document.querySelector('input[name="config"]:checked');
-    if (!configSelected) {
-      alert("Please select a configuration type before proceeding.");
+  function validateAndNextStep(targetName, errorMessage) {
+    const selected = document.querySelector(`input[name="${targetName}"]:checked`);
+    if (!selected) {
+      alert(errorMessage);
     } else {
       nextStep();
     }
@@ -124,7 +124,7 @@
         </label>
       </div>
       <div class="flex justify-end mt-4">
-        <button onclick="validateStep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+        <button onclick="validateAndNextStep('config', 'Please select a configuration type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
       </div>
     </div>
 <!-- Step 1: Select Connector Type (Single Fiber) -->
@@ -150,7 +150,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('connector', 'Please select a connector type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -173,7 +173,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('polish', 'Please select a polish type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -200,7 +200,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('fiber', 'Please select a fiber type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -231,7 +231,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('boot', 'Please select a boot option.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -250,7 +250,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('gender', 'Please select a gender.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -269,7 +269,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('bb', 'Please select a fiber type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -307,7 +307,7 @@
 
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+    <button onclick="validateAndNextStep('cc', 'Please select a loss type.')"	 class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
   </div>
 </div>
 
@@ -330,7 +330,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
-    <button onclick="validatestep0()" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+    <button onclick="validateAndNextStep('ddddd', 'Please select a jacket type.')" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
   </div>
 </div>
 
