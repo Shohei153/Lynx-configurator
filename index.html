@@ -118,8 +118,227 @@
         <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
       </div>
     </div>
+<!-- Step 1: Select Connector Type (Single Fiber) -->
+<div class="step">
+  <p class="font-semibold mb-2">1. Select Connector Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="LC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/LC.png" class="option-image" alt="LC"> LC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="SC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/SC.png" class="option-image" alt="SC"> SC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="FC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/FC.png" class="option-image" alt="FC"> FC
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="connector" value="ST" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/ST.png" class="option-image" alt="ST"> ST
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
 
-    <!-- Steps 1-4 (Single Fiber) and 5-8 (Ribbon MPO) will go here, same structure as your original -->
+<!-- Step 2: Select Polish Type (Single Fiber) -->
+<div class="step">
+  <p class="font-semibold mb-2">2. Select Polish Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="APC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/APC.png" class="option-image" alt="APC"> APC (Angled Polish)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="UPC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/UPC.png" class="option-image" alt="UPC"> UPC (Ultra Polished)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="polish" value="PC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/PC.png" class="option-image" alt="PC"> PC (Physical Contact)
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 3: Select Fiber Type (Single Fiber) -->
+<div class="step">
+  <p class="font-semibold mb-2">3. Select Fiber Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="SM" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/SM.png" class="option-image" alt="SM"> SM (Single Mode)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM1" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/OM1.png" class="option-image" alt="OM1"> OM1 (62.5µm Multimode)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM2" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/OM2.png" class="option-image" alt="OM2"> OM2 (50µm Multimode)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="fiber" value="OM3" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/OM3.png" class="option-image" alt="OM3"> OM3 (Laser Optimized Multimode)
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 4: Select Boot Option (Single Fiber) -->
+<div class="step">
+  <p class="font-semibold mb-2">4. Select Boot Option</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250900" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/250900.png" class="option-image" alt="250900"> 250900 (250µm or 900µm)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250900SB" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/250900SB.png" class="option-image" alt="250900SB"> 250900SB (Short Boot)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="250FT8" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/250FT8.png" class="option-image" alt="250FT8"> 250FT8 (8-inch Tube)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="2.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/2.0.png" class="option-image" alt="2.0"> 2.0 (2.0mm Cord)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="boot" value="3.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_Single/3.0.png" class="option-image" alt="3.0"> 3.0 (3.0mm Cord)
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 5: Select Gender (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">5. Select Gender</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="gender" value="M" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/M.jpg" class="option-image" alt="Male"> Male
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="gender" value="F" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/F.jpg" class="option-image" alt="Female"> Female
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 6: Select Fiber Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">6. Select Fiber Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="bb" value="SM" class="sr-only" onchange="handleFiberTypeChange('SM'); updatePartNumber()">
+      <img src="images/Lynx_MPO/SM.jpg" class="option-image" alt="SM"> SM (Single Mode)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="bb" value="MM" class="sr-only" onchange="handleFiberTypeChange('MM'); updatePartNumber()">
+      <img src="images/Lynx_MPO/MM.jpg" class="option-image" alt="MM"> MM (Multi Mode)
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 7: Select Loss Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">7. Select Loss Type</p>
+
+  <!-- Single Mode Options -->
+  <div id="cc-sm" class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="LL" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/SM-LL.jpg" class="option-image" alt="Low Loss"> LL (Low Loss: IL ≤ 0.35dB, RL ≥ 60dB)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="SL" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/SM-SL.jpg" class="option-image" alt="Standard Loss"> SL (Standard Loss: IL ≤ 0.75dB, RL ≥ 60dB)
+    </label>
+  </div>
+
+  <!-- Multi Mode Options -->
+  <div id="cc-mm" class="grid gap-3 hidden">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="01" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/MM-01.jpg" class="option-image" alt="OM1"> 01 (OM1: IL ≤ 0.35dB, RL ≥ 20dB)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="02" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/MM-02.jpg" class="option-image" alt="OM2"> 02 (OM2: IL ≤ 0.35dB, RL ≥ 20dB)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="cc" value="03" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/MM-03.jpg" class="option-image" alt="OM3"> 03 (OM3/OM4/OM5: Laser Optimized)
+    </label>
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+  </div>
+</div>
+
+<!-- Step 8: Select Jacket Type (MPO) -->
+<div class="step">
+  <p class="font-semibold mb-2">8. Select Jacket Type</p>
+  <div class="grid gap-3">
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RBN" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/RBN.jpg" class="option-image" alt="RBN"> RBN (12-fiber Ribbon without Jacket)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RBC" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/RBC.jpg" class="option-image" alt="RBC"> RBC (12-fiber Ribbon with Jacket)
+    </label>
+    <label class="cursor-pointer border rounded-xl px-4 py-3 hover:bg-blue-50 transition">
+      <input type="radio" name="ddddd" value="RC3.0" class="sr-only" onchange="updatePartNumber()">
+      <img src="images/Lynx_MPO/RC3.0.jpg" class="option-image" alt="RC3.0"> RC3.0 (3.0mm Cord)
+    </label>
+  </div>
+  <div class="flex justify-between mt-4">
+    <button onclick="prevStep()" class="bg-gray-300 px-4 py-2 rounded">Back</button>
+    <button onclick="nextStep()" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+  </div>
+</div>
+
+<!-- Step 9: Result Summary -->
+<div class="step text-center">
+  <p class="text-lg font-semibold mb-2">Your Generated Part Number</p>
+  <p id="result" class="text-xl font-mono font-bold text-green-600 mb-4"></p>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('result').innerText)" class="mb-4 bg-gray-200 hover:bg-gray-300 text-sm px-3 py-1 rounded">
+    📋 Copy to Clipboard
+  </button>
+  <div class="space-y-2">
+    <a href="https://example.com/spec-sheet" target="_blank" class="block text-blue-600 underline">📄 View Spec Sheet</a>
+    <a href="https://example.com/manual" target="_blank" class="block text-blue-600 underline">📘 Installation Manual</a>
+  </div>
+  <button onclick="currentStep=0;showStep(0)" class="mt-6 text-blue-500 underline text-sm">🔁 Start Over</button>
+</div>
+
 
     <!-- Step 9: Result Summary -->
     <div class="step text-center">
